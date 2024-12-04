@@ -1,0 +1,11 @@
+version: 2
+builds:
+  - main: ./cmd/sleigh
+    binary: sleigh
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
