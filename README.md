@@ -25,12 +25,13 @@ or
 # Usage
 
 You must provide a session cookie to get the input. Advent of Code needs a way to verify that you've
-logged into the website. To make it easy, its recommended to create an environment variable
-`SESSION_COOKIE`. You can also optionally pass the session cookie with the `-c` flag i.e. 
+logged into the website. To make it easy, its recommended to create an `.env` file with
+`SESSION_COOKIE=<your-session-cookie>` and run `sleigh` from that directory. Other options are:
 
-`sleigh -c <your-session-cookie>`
+- add to your environment directly: `export SESSION_COOKIE=<your-session-cookie>`  
+- pass it using the -c flag `sleigh -c <your-session-cookie>`  
 
-for other options run `sleigh -h`
+To see all options run `sleigh -h`
 
 ### Finding your Session Cookie
 
