@@ -118,6 +118,6 @@ func main() {
 
 		file.WriteString(strings.Trim(puzzleInput, "\n"))
 
-		fmt.Println("File created successfully:", fileName)
+		fmt.Println("File created successfully:", *name)
 	}
 }
