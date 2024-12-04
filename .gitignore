@@ -1,5 +1,7 @@
 .vscode
 .env
-sleigh
 *input.txt
 dist
+sleigh
+
+!cmd/sleigh
