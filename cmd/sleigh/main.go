@@ -63,16 +63,12 @@ func main() {
 	if month != 12 {
 		today = 1
 	}
-	fileName := fmt.Sprintf("%d-input.txt", today)
-	if today < 10 {
-		fileName = fmt.Sprintf("0%d-input.txt", today)
-	}
 
 	envCookie := os.Getenv("SESSION_COOKIE")
 	sessionCookie := flag.String("c", "", "Cookie for your unique Advent of Code session.")
 	year := flag.Int("year", thisYear, fmt.Sprintf("Year of the problem (2015-%d).", thisYear))
 	day := flag.Int("day", today, "Day of the problem (1-25).")
-	name := flag.String("name", fileName, "Optionally set a filename.")
+	name := flag.String("name", "", "Optionally set a filename. (default yyyy-dd-input.txt)")
 	flag.Parse()
 
 	if *sessionCookie == "" && envCookie == "" {
@@ -87,6 +83,12 @@ func main() {
 	if *day > 25 || *day < 1 {
 		fmt.Printf("Day is out of range, please enter a day between 1 and 25, if left blank, defaults to today (%d) if run in the month of December.", today)
 		return
+	}
+
+	fileName := *name
+	if fileName == "" {
+		dayFormatted := fmt.Sprintf("%02d", *day)
+		fileName = fmt.Sprintf("%d-%s-input.txt", *year, dayFormatted)
 	}
 
 	var puzzleInput string
@@ -109,7 +111,7 @@ func main() {
 	}
 
 	if statusCode == 200 {
-		file, err := os.Create(*name)
+		file, err := os.Create(fileName)
 		if err != nil {
 			fmt.Println("Error creating file:", err)
 			return
@@ -118,6 +120,7 @@ func main() {
 
 		file.WriteString(strings.Trim(puzzleInput, "\n"))
 
-		fmt.Println("File created successfully:", *name)
+		fmt.Println("File created successfully:", fileName)
 	}
+
 }
